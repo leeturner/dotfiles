@@ -14,7 +14,7 @@ set nocompatible
 
 " Use pathogen to easily modify the runtime path to include all plugins under
 " the ~/.vim/bundle directory
- filetype off                    " force reloading *after* pathogen loaded
+filetype off                    " force reloading *after* pathogen loaded
  call pathogen#infect()
  call pathogen#helptags()
 filetype plugin indent on       " enable detection, plugins and indenting in one step
@@ -43,7 +43,8 @@ set number                      " always show line numbers
 set showmatch                   " set show matching parenthesis
 set ignorecase                  " ignore case when searching
 set smartcase                   " ignore case if search pattern is all lowercase, case-sensitive otherwise
-set smarttab                    " insert tabs on the start of a line according to shiftwidth, not tabstop set scrolloff=4 keep 4 lines off the edges of the screen when scrolling
+set smarttab                    " insert tabs on the start of a line according to shiftwidth, not tabstop 
+set scrolloff=4                 "keep 4 lines off the edges of the screen when scrolling
 set virtualedit=all             " allow the cursor to go in to "invalid" places
 set hlsearch                    " highlight search terms
 set incsearch                   " show search matches as you type
@@ -357,37 +358,6 @@ nnoremap \ :Ag<SPACE>
 nnoremap <leader>v V`]
 " }}}
 
-" NERDTree settings {{{
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
-nnoremap <leader>N :NERDTreeClose<CR>
-
-" Store the bookmarks file
-let NERDTreeBookmarksFile=expand("$HOME/.vim/NERDTreeBookmarks")
-
-" Show the bookmarks table on startup
-let NERDTreeShowBookmarks=1
-
-" Show hidden files, too
-let NERDTreeShowFiles=1
-let NERDTreeShowHidden=1
-
-" Quit on opening files from the tree
-let NERDTreeQuitOnOpen=1
-
-" Highlight the selected entry in the tree
-let NERDTreeHighlightCursorline=1
-
-" Use a single click to fold/unfold directories and a double click to open
-" files
-let NERDTreeMouseMode=2
-
-" Don't display these kinds of files
-let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
-            \ '\.o$', '\.so$', '\.egg$', '^\.git$', '__pycache__', '\.DS_Store' ]
-
-" }}}
-
 " vim-flake8 default configuration
 let g:flake8_show_in_gutter=1
 
@@ -635,17 +605,8 @@ au filetype vim set formatoptions-=o
 " }}}
 
 " Extra user or machine specific settings {{{
-" source ~/.vim/user.vim
+source ~/.vim/user.vim
 " }}}
-
-" Creating underline/overline headings for markup languages
-" Inspired by http://sphinx.pocoo.org/rest.html#sections
-nnoremap <leader>1 yyPVr=jyypVr=
-nnoremap <leader>2 yyPVr*jyypVr*
-nnoremap <leader>3 yypVr=
-nnoremap <leader>4 yypVr-
-nnoremap <leader>5 yypVr^
-nnoremap <leader>6 yypVr"
 
 iab lorem Lorem ipsum dolor sit amet, consectetur adipiscing elit
 iab llorem Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Etiam lacus ligula, accumsan id imperdiet rhoncus, dapibus vitae arcu.  Nulla non quam erat, luctus consequat nisi
@@ -733,17 +694,10 @@ nnoremap <leader>t :CtrlP<cr>
 nnoremap <leader>. :CtrlPTag<cr>
 nnoremap <leader>b :CtrlPBuffer<cr>
 
-" Learn Vim Script the Hard Way Exercises
-"noremap - ddp
-"noremap _ ddkP
 
 " C-U in insert/normal mode, to uppercase the word under cursor
 inoremap <c-u> <esc>viwUea
 nnoremap <c-u> viwUe
-
-iabbr m@@ me@nvie.com
-iabbr v@@ vincent@3rdcloud.com
-iabbr ssig --<cr>Vincent Driessen<cr>vincent@3rdcloud.com
 
 " Quote words under cursor
 nnoremap <leader>" viW<esc>a"<esc>gvo<esc>i"<esc>gvo<esc>3l

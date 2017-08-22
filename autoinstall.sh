@@ -1,5 +1,5 @@
 #!/bin/sh
-INSTALL_TO=~/dev
+INSTALL_TO=~/dev/tmp
 
 warn() {
     echo "$1" >&2
@@ -25,8 +25,8 @@ install_vimrc () {
 
     # Symlink ~/.vim and ~/.vimrc
     cd ~
-    ln -s "$INSTALL_TO/vimrc/vimrc" .vimrc
-    ln -s "$INSTALL_TO/vimrc/vim" .vim
+    ln -sv "$INSTALL_TO/vimrc/vimrc" .vimrc
+    ln -sv "$INSTALL_TO/vimrc/vim" .vim
     touch ~/.vim/user.vim
 
     echo "Installed and configured .vim, have fun."
