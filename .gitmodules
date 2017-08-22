@@ -1,3 +1,3 @@
 [submodule "vim/bundle/taskpaper"]
 	path = vim/bundle/taskpaper
-	url = git://github.com/davidoc/taskpaper.git 
+	url = git://github.com/davidoc/taskpaper.vim.git 
