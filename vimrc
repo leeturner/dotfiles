@@ -362,6 +362,32 @@ nnoremap \ :Ag<SPACE>
 nnoremap <leader>v V`]
 " }}}
 
+" NERDTree settings {{{
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
+nnoremap <leader>N :NERDTreeClose<CR>
+
+" Show hidden files, too
+let NERDTreeShowFiles=1
+let NERDTreeShowHidden=1
+
+" Quit on opening files from the tree
+let NERDTreeQuitOnOpen=1
+
+" Highlight the selected entry in the tree
+let NERDTreeHighlightCursorline=1
+
+" Use a single click to fold/unfold directories and a double click to open
+" files
+let NERDTreeMouseMode=2
+
+" Don't display these kinds of files
+let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
+            \ '\.o$', '\.so$', '\.egg$', '^\.git$', '__pycache__',
+            '\.DS_Store' ]
+
+" }}}
+
 " vim-flake8 default configuration
 let g:flake8_show_in_gutter=1
 
