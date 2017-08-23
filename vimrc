@@ -247,11 +247,15 @@ nnoremap mk :make<CR>
 nnoremap ' `
 nnoremap ` '
 
-" Use the damn hjkl keys
-" noremap <up> <nop>
-" noremap <down> <nop>
-" noremap <left> <nop>
-" noremap <right> <nop>
+" Use the damn hjkl keys - disables the arrow keys in insert and normal modes
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
 
 " Remap j and k to act as expected when used on long, wrapped, lines
 nnoremap j gj
