@@ -20,7 +20,7 @@ clean_vimrc () {
     rm ./.vim
 
     echo "Removing your tmp vim files......"
-    rm -rv "$INSTALL_TO/vimrc"
+    rm -r "$INSTALL_TO/vimrc"
 
     echo "Your .vim and .vimrc files have been cleaned up."
 }
