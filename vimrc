@@ -43,7 +43,7 @@ set number                      " always show line numbers
 set showmatch                   " set show matching parenthesis
 set ignorecase                  " ignore case when searching
 set smartcase                   " ignore case if search pattern is all lowercase, case-sensitive otherwise
-set smarttab                    " insert tabs on the start of a line according to shiftwidth, not tabstop 
+set smarttab                    " insert tabs on the start of a line according to shiftwidth, not tabstop
 set scrolloff=5                 " keep 4 lines off the edges of the screen when scrolling
 set virtualedit=all             " allow the cursor to go in to "invalid" places
 set hlsearch                    " highlight search terms
@@ -385,9 +385,6 @@ let NERDTreeMouseMode=2
 let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
             \ '\.o$', '\.so$', '\.egg$', '^\.git$', '__pycache__', '\.DS_Store' ]
 " }}}
-
-" vim-flake8 default configuration
-let g:flake8_show_in_gutter=1
 
 " Conflict markers {{{
 " highlight conflict markers
@@ -759,7 +756,7 @@ vnoremap ia :<c-u>execute "normal! ?[,(]\rwv/[),]\rh"<cr>
 nnoremap <leader>sh :execute "leftabove vsplit" bufname('#')<cr>
 nnoremap <leader>sl :execute "rightbelow vsplit" bufname('#')<cr>
 
-" open a new vertical split and switch over to it. 
+" open a new vertical split and switch over to it.
 nnoremap <leader>w <C-w>v<C-w>l
 
 " Grep searches
@@ -777,10 +774,6 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 " Configure vim-expand-region, for easy selection precision
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
-
-" Configure ArgWrap
-let g:argwrap_tail_comma = 1
-nnoremap <leader>w :ArgWrap<cr>
 
 " Default settings. (NOTE: Remove comments in dictionary before sourcing)
 let g:expand_region_text_objects = {
