@@ -735,6 +735,9 @@ vnoremap ia :<c-u>execute "normal! ?[,(]\rwv/[),]\rh"<cr>
 nnoremap <leader>sh :execute "leftabove vsplit" bufname('#')<cr>
 nnoremap <leader>sl :execute "rightbelow vsplit" bufname('#')<cr>
 
+" open a new vertical split and switch over to it. 
+nnoremap <leader>w <C-w>v<C-w>l
+
 " Grep searches
 "nnoremap <leader>g :silent execute "grep! -R " . shellescape('<cword>') . " ."<cr>:copen 12<cr>
 "nnoremap <leader>G :silent execute "grep! -R " . shellescape('<cWORD>') . " ."<cr>:copen 12<cr>
