@@ -1,5 +1,5 @@
-[submodule "vim/bundle/taskpaper"]
-	path = vim/bundle/taskpaper
+[submodule "vim/bundle/taskpaper.vim"]
+	path = vim/bundle/taskpaper.vim
 	url = git://github.com/davidoc/taskpaper.vim.git 
 [submodule "vim/bundle/nerdcommenter"]
 	path = vim/bundle/nerdcommenter
