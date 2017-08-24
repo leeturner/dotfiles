@@ -365,7 +365,6 @@ nnoremap <leader>v V`]
 " NERDTree settings {{{
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
-nnoremap <leader>N :NERDTreeClose<CR>
 
 " Show hidden files, too
 let NERDTreeShowFiles=1
