@@ -816,3 +816,5 @@ let g:neoformat_try_formatprg = 1
 " Highlight the colour of the coloumcolur bar on GUI and non-gui
 hi ColorColumn guibg=darkgrey
 hi ColorColumn ctermbg=8
+
+let g:jellybeans_overrides = { 'background': { 'guibg': '000000' }, }
