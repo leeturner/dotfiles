@@ -657,11 +657,9 @@ endif
 
 "colorscheme mustang
 "colorscheme mustang_silent
-colorscheme wombat256
-highlight Normal guibg=black guifg=white
-set background=dark
+"colorscheme wombat256
 "colorscheme jellygrass
-"colorscheme jellybeans
+colorscheme jellybeans
 "colorscheme onedark
 
 " Pulse ------------------------------------------------------------------- {{{
