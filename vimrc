@@ -661,10 +661,6 @@ endif
 "colorscheme jellygrass
 colorscheme jellybeans
 
-let g:jellybeans_overrides = {
-\    'background': { 'guibg': '000000' },
-\}
-
 " Pulse ------------------------------------------------------------------- {{{
 
 function! PulseCursorLine()
@@ -820,3 +816,6 @@ let g:neoformat_try_formatprg = 1
 hi ColorColumn guibg=darkgrey
 hi ColorColumn ctermbg=8
 
+let g:jellybeans_overrides = {
+\    'background': { 'guibg': '000000' },
+\}
