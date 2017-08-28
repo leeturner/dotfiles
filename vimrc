@@ -229,17 +229,6 @@ nnoremap <leader>q :bd<CR>   " Quickly close the current buffer
 " Use Q for formatting the current paragraph (or visual selection)
 vnoremap Q gq
 nnoremap Q gqap
-" set breakindent on  " keep paragraph indentation when re-wrapping text
-
-" Sort paragraphs
-vnoremap <leader>s !sort -f<CR>gv
-nnoremap <leader>s vip!sort -f<CR><Esc>
-
-" make p in Visual mode replace the selected text with the yank register
-vnoremap p <Esc>:let current_reg = @"<CR>gvdi<C-R>=current_reg<CR><Esc>
-
-" Shortcut to make
-nnoremap mk :make<CR>
 
 " Swap implementations of ` and ' jump to markers
 " By default, ' jumps to the marked line, ` jumps to the marked line and
@@ -281,20 +270,12 @@ vnoremap <silent> <leader>d "_d
 " Quick yanking to the end of the line
 nnoremap Y y$
 
-" YankRing stuff
-let g:yankring_history_dir = '$HOME/.vim/.tmp'
-nnoremap <leader>r :YRShow<CR>
-
 " Edit the vimrc file
 nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
 nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
 
 " Clears the search register
 nnoremap <silent> <leader>/ :nohlsearch<CR>
-
-" Pull word under cursor into LHS of a substitute (for quick search and
-" replace)
-nnoremap <leader>z :%s#\<<C-r>=expand("<cword>")<CR>\>#
 
 " Keep search matches in the middle of the window and pulse the line when moving
 " to them.
@@ -310,12 +291,6 @@ inoremap jj <Esc>
 " nnoremap <leader>ar :right<CR>
 " nnoremap <leader>ac :center<CR>
 
-" Sudo to write
-cnoremap w!! w !sudo tee % >/dev/null
-
-" Ctrl+W to redraw
-nnoremap <C-w> :redraw!<cr>
-
 " Jump to matching pairs easily, with Tab
 nnoremap <Tab> %
 vnoremap <Tab> %
@@ -324,42 +299,6 @@ vnoremap <Tab> %
 nnoremap <Space> za
 vnoremap <Space> za
 
-" Strip all trailing whitespace from a file, using ,W
-nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
-
-" Use The Silver Searcher over grep, iff possible
-if executable('ag')
-   " Use ag over grep
-   set grepprg=ag\ --nogroup\ --nocolor
-
-   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-   " ag is fast enough that CtrlP doesn't need to cache
-   let g:ctrlp_use_caching = 0
-endif
-
-" grep/Ack/Ag for the word under cursor
-" vnoremap <leader>a y:grep! "\b<c-r>"\b"<cr>:cw<cr>
-" nnoremap <leader>a :grep! "\b<c-r><c-w>\b"
-vnoremap <leader>a y:Ag <c-r><cr>:cw<cr>
-nnoremap <leader>a :Ag <c-r><c-w>
-nnoremap K *N:grep! "\b<c-r><c-w>\b"<cr>:cw<cr>
-
-" Allow quick additions to the spelling dict
-nnoremap <leader>g :spellgood <c-r><c-w>
-
-" Define "Ag" command
-command -nargs=+ -complete=file -bar Ag silent! grep! <args> | cwindow | redraw!
-
-" bind \ (backward slash) to grep shortcut
-nnoremap \ :Ag<SPACE>
-
-" Creating folds for tags in HTML
-"nnoremap <leader>ft Vatzf
-
-" Reselect text that was just pasted with ,v
-nnoremap <leader>v V`]
 " }}}
 
 " NERDTree settings {{{
@@ -383,228 +322,6 @@ let NERDTreeMouseMode=2
 " Don't display these kinds of files
 let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
             \ '\.o$', '\.so$', '\.egg$', '^\.git$', '__pycache__', '\.DS_Store' ]
-" }}}
-
-" Conflict markers {{{
-" highlight conflict markers
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
-" shortcut to jump to next conflict marker
-nnoremap <silent> <leader>c /^\(<\\|=\\|>\)\{7\}\([^=].\+\)\?$<CR>
-" }}}
-
-" Filetype specific handling {{{
-" only do this part when compiled with support for autocommands
-if has("autocmd")
-    augroup invisible_chars "{{{
-        au!
-
-        " Show invisible characters in all of these files
-        autocmd filetype vim setlocal list
-        autocmd filetype python,rst setlocal list
-        autocmd filetype ruby setlocal list
-        autocmd filetype javascript,css setlocal list
-    augroup end "}}}
-
-    augroup vim_files "{{{
-        au!
-
-        " Bind <F1> to show the keyword under cursor
-        " general help can still be entered manually, with :h
-        autocmd filetype vim noremap <buffer> <F1> <Esc>:help <C-r><C-w><CR>
-        autocmd filetype vim noremap! <buffer> <F1> <Esc>:help <C-r><C-w><CR>
-    augroup end "}}}
-
-    augroup html_files "{{{
-        au!
-
-        " This function detects, based on HTML content, whether this is a
-        " Django template, or a plain HTML file, and sets filetype accordingly
-        fun! s:DetectHTMLVariant()
-            let n = 1
-            while n < 50 && n < line("$")
-                " check for django
-                if getline(n) =~ '{%\s*\(extends\|load\|block\|if\|for\|include\|trans\)\>'
-                    set ft=htmldjango.html
-                    return
-                endif
-                let n = n + 1
-            endwhile
-            " go with html
-            set ft=html
-        endfun
-
-        " Auto-tidy selection
-        vnoremap <leader>x :!tidy -q -i --show-errors 0 --show-body-only 1 --wrap 0<cr><cr>
-
-        autocmd BufNewFile,BufRead *.html,*.htm,*.j2 call s:DetectHTMLVariant()
-
-        " Auto-closing of HTML/XML tags
-        let g:closetag_default_xml=1
-        autocmd filetype html,htmldjango let b:closetag_html_style=1
-        autocmd filetype html,xhtml,xml source ~/.vim/scripts/closetag.vim
-    augroup end " }}}
-
-    augroup python_files "{{{
-        au!
-
-        " This function detects, based on Python content, whether this is a
-        " Django file, which may enabling snippet completion for it
-        fun! s:DetectPythonVariant()
-            let n = 1
-            while n < 50 && n < line("$")
-                " check for django
-                if getline(n) =~ 'import\s\+\<django\>' || getline(n) =~ 'from\s\+\<django\>\s\+import'
-                    set ft=python.django
-                    "set syntax=python
-                    return
-                endif
-                let n = n + 1
-            endwhile
-            " go with html
-            set ft=python
-        endfun
-        autocmd BufNewFile,BufRead *.py call s:DetectPythonVariant()
-
-        " PEP8 compliance (set 1 tab = 4 chars explicitly, even if set
-        " earlier, as it is important)
-        autocmd filetype python setlocal textwidth=78
-        autocmd filetype python match ErrorMsg '\%>120v.\+'
-
-        " But disable autowrapping as it is super annoying
-        autocmd filetype python setlocal formatoptions-=t
-
-        " Folding for Python (uses syntax/python.vim for fold definitions)
-        "autocmd filetype python,rst setlocal nofoldenable
-        "autocmd filetype python setlocal foldmethod=expr
-
-        " Python runners
-        autocmd filetype python noremap <buffer> <F5> :w<CR>:!python %<CR>
-        autocmd filetype python inoremap <buffer> <F5> <Esc>:w<CR>:!python %<CR>
-        autocmd filetype python noremap <buffer> <S-F5> :w<CR>:!ipython %<CR>
-        autocmd filetype python inoremap <buffer> <S-F5> <Esc>:w<CR>:!ipython %<CR>
-
-        " Automatic insertion of breakpoints
-        autocmd filetype python nnoremap <buffer> <leader>bp :normal oimport pdb; pdb.set_trace()  # TODO: BREAKPOINT  # noqa<Esc>
-
-        " Toggling True/False
-        autocmd filetype python nnoremap <silent> <C-t> mmviw:s/True\\|False/\={'True':'False','False':'True'}[submatch(0)]/<CR>`m:nohlsearch<CR>
-
-        " Run a quick static syntax check every time we save a Python file
-        autocmd BufWritePost *.py call Flake8()
-
-        " Defer to isort for sorting Python imports (instead of using Unix sort)
-        autocmd filetype python nnoremap <leader>s mX:%!isort -<cr>`X:redraw!<cr>
-    augroup end " }}}
-
-    augroup js_files "{{{
-
-        " Defer to import-sort for sorting JavaScript imports (instead of using Unix sort)
-        autocmd filetype javascript nnoremap <leader>s :write<cr>mX:!import-sort --overwrite %<cr>:edit!<cr>`X:redraw!<cr>
-
-    augroup end " }}}
-
-    augroup clojure_files "{{{
-        au!
-
-        " Set up <leader>r to run the entire file with vim-fireplace
-        autocmd filetype clojure nnoremap <leader>r :%Eval<cr>
-        autocmd filetype clojure RainbowParenthesesActivate
-        autocmd filetype clojure RainbowParenthesesLoadRound
-        autocmd filetype clojure RainbowParenthesesLoadSquare
-        autocmd filetype clojure RainbowParenthesesLoadBraces
-    augroup end " }}}
-
-    augroup supervisord_files "{{{
-        au!
-
-        autocmd BufNewFile,BufRead supervisord.conf set ft=dosini
-    augroup end " }}}
-
-    augroup markdown_files "{{{
-        au!
-
-        autocmd filetype markdown noremap <buffer> <leader>p :w<CR>:!open -a 'Marked 2' %<CR><CR>
-    augroup end " }}}
-
-    augroup ruby_files "{{{
-        au!
-
-    augroup end " }}}
-
-    augroup rst_files "{{{
-        au!
-
-        " Auto-wrap text around 74 chars
-        autocmd filetype rst setlocal textwidth=74
-        autocmd filetype rst setlocal formatoptions+=nqt
-        autocmd filetype rst match ErrorMsg '\%>74v.\+'
-    augroup end " }}}
-
-    augroup css_files "{{{
-        au!
-
-        autocmd filetype css,less setlocal foldmethod=marker foldmarker={,}
-    augroup end "}}}
-
-    augroup javascript_files "{{{
-        au!
-
-        autocmd filetype javascript setlocal expandtab
-        autocmd filetype javascript setlocal listchars=trail:·,extends:#,nbsp:·
-        autocmd filetype javascript setlocal foldmethod=marker foldmarker={,}
-
-        " Toggling True/False
-        autocmd filetype javascript nnoremap <silent> <C-t> mmviw:s/true\\|false/\={'true':'false','false':'true'}[submatch(0)]/<CR>`m:nohlsearch<CR>
-
-        " Enable insertion of "debugger" statement in JS files
-        autocmd filetype javascript nnoremap <leader>b Odebugger;<esc>
-
-        " Use prettier to format JS files
-        autocmd FileType javascript set formatprg=bin/prettier-stdin
-        autocmd BufWritePre *.js,*.jsx Neoformat
-
-    augroup end "}}}
-
-    augroup textile_files "{{{
-        au!
-
-        autocmd filetype textile set tw=78 wrap
-
-        " Render YAML front matter inside Textile documents as comments
-        autocmd filetype textile syntax region frontmatter start=/\%^---$/ end=/^---$/
-        autocmd filetype textile highlight link frontmatter Comment
-    augroup end "}}}
-
-    augroup git_files "{{{
-        au!
-
-        " Don't remember the last cursor position when editing commit
-        " messages, always start on line 1
-        autocmd filetype gitcommit call setpos('.', [0, 1, 1, 0])
-    augroup end "}}}
-endif
-" }}}
-
-" Skeleton processing {{{
-
-if has("autocmd")
-
-    "if !exists('*LoadTemplate')
-    "function LoadTemplate(file)
-        "" Add skeleton fillings for Python (normal and unittest) files
-        "if a:file =~ 'test_.*\.py$'
-            "execute "0r ~/.vim/skeleton/test_template.py"
-        "elseif a:file =~ '.*\.py$'
-            "execute "0r ~/.vim/skeleton/template.py"
-        "endif
-    "endfunction
-    "endif
-
-    "autocmd BufNewFile * call LoadTemplate(@%)
-
-endif " has("autocmd")
-
 " }}}
 
 " Restore cursor position upon reopening files {{{
@@ -701,13 +418,6 @@ endfunction
 
 " }}}
 
-" Powerline configuration ------------------------------------------------- {{{
-
-let g:Powerline_symbols = 'compatible'
-"let g:Powerline_symbols = 'fancy'
-
-" }}}
-
 " Ignore common directories
 let g:ctrlp_custom_ignore = {
    \ 'dir': 'node_modules\|bower_components',
@@ -736,81 +446,13 @@ vnoremap <leader>' <esc>a'<esc>gvo<esc>i'<esc>gvo<esc>ll
 nnoremap H 0
 nnoremap L $
 
-" Define operator-pending mappings to quickly apply commands to function names
-" and/or parameter lists in the current line
-onoremap inf :<c-u>normal! 0f(hviw<cr>
-onoremap anf :<c-u>normal! 0f(hvaw<cr>
-onoremap in( :<c-u>normal! 0f(vi(<cr>
-onoremap an( :<c-u>normal! 0f(va(<cr>
-
-" "Next" tag
-onoremap int :<c-u>normal! 0f<vit<cr>
-onoremap ant :<c-u>normal! 0f<vat<cr>
-
-" Function argument selection (change "around argument", change "inside argument")
-onoremap ia :<c-u>execute "normal! ?[,(]\rwv/[),]\rh"<cr>
-vnoremap ia :<c-u>execute "normal! ?[,(]\rwv/[),]\rh"<cr>
-
-" Split previously opened file ('#') in a split window
-nnoremap <leader>sh :execute "leftabove vsplit" bufname('#')<cr>
-nnoremap <leader>sl :execute "rightbelow vsplit" bufname('#')<cr>
-
 " open a new vertical split and switch over to it.
 nnoremap <leader>w <C-w>v<C-w>l
-
-" Grep searches
-"nnoremap <leader>g :silent execute "grep! -R " . shellescape('<cword>') . " ."<cr>:copen 12<cr>
-"nnoremap <leader>G :silent execute "grep! -R " . shellescape('<cWORD>') . " ."<cr>:copen 12<cr>
-
-" Rope config
-nnoremap <leader>A :RopeAutoImport<cr>
 
 " Switch from block-cursor to vertical-line-cursor when going into/out of
 " insert mode
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-
-" Configure vim-expand-region, for easy selection precision
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
-
-" Default settings. (NOTE: Remove comments in dictionary before sourcing)
-let g:expand_region_text_objects = {
-   \ 'iw' :0,
-   \ 'i"' :0,
-   \ 'i''' :0,
-   \ 'a"' :0,
-   \ 'a''' :0,
-   \ 'i)' :1,
-   \ 'i}' :1,
-   \ 'i]' :1,
-   \ 'a)' :1,
-   \ 'a}' :1,
-   \ 'a]' :1,
-   \ }
-
-" {{{ Auto-format Elm source files upon save
-let g:elm_format_autosave = 1
-" }}}
-
-" {{{ Check JS with Flow
-" let g:flow#enable = 0
-let g:flow#autoclose = 1
-let g:flow#errjmp = 1
-" }}}
-
-" TypeScript settings {{{
-
-" let g:typescript_compiler_binary = 'tsc'
-" let g:typescript_compiler_options = '--target es2015'
-
-" }}}
-
-" NeoFormat rules {{{
-
-let g:neoformat_try_formatprg = 1
-
-" }}}
 
 " Highlight the colour of the coloumcolur bar on GUI and non-gui
 hi ColorColumn guibg=darkgrey
