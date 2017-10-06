@@ -80,8 +80,8 @@ nnoremap <leader>N :setlocal number!<cr>
 
 " Thanks to Steve Losh for this liberating tip
 " See http://stevelosh.com/blog/2010/09/coming-home-to-vim
-nnoremap / /\v
-vnoremap / /\v
+" nnoremap / /\v
+" vnoremap / /\v
 
 " Speed up scrolling of the viewport slightly
 nnoremap <C-e> 2<C-e>
