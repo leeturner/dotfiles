@@ -67,7 +67,7 @@ set nrformats=                  " make <C-a> and <C-x> play well with
                                 "    them octal or hex)
 
 set shortmess+=I                " hide the launch screen
-set clipboard=unnamed           " normal OS clipboard interaction
+set clipboard=unnamedplus       " normal OS clipboard interaction on Linux
 set autoread                    " automatically reload files changed outside of Vim
 set splitbelow                  " open split panes to the right and bottom which
 set splitright                  " feels more natural than Vim's default
