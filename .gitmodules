@@ -13,3 +13,6 @@
 [submodule "vim/bundle/ctrlp.vim"]
 	path = vim/bundle/ctrlp.vim
 	url = git://github.com/kien/ctrlp.vim.git 
+[submodule "vim/bundle/vim-unimpaired"]
+    path = vim/bundle/vim-unimpaired
+    url = git://github.com/tpope/vim-unimpaired.git
