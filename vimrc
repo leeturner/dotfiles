@@ -51,21 +51,10 @@ set incsearch                   " show search matches as you type
 set gdefault                    " search/replace "globally" (on a line) by default
 set showbreak=↪\ 
 set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
-
 set list                        " show invisible characters by default. see listchars
-set pastetoggle=<F2>            " when in insert mode, press <F2> to go to
-                                "    paste mode, where you can paste mass data
-                                "    that won't be autoindented
-set mouse=a                     " enable using the mouse if terminal emulator
-                                "    supports it (xterm does)
+set mouse=a                     " enable using the mouse if terminal emulator supports it (xterm does)
 set fileformats="unix,dos,mac"
 set formatoptions+=1            " When wrapping paragraphs, don't end lines
-                                "    with 1-letter words (looks stupid)
-
-set nrformats=                  " make <C-a> and <C-x> play well with
-                                "    zero-padded numbers (i.e. don't consider
-                                "    them octal or hex)
-
 set shortmess+=I                " hide the launch screen
 set clipboard=unnamedplus       " normal OS clipboard interaction on Linux
 set autoread                    " automatically reload files changed outside of Vim
@@ -74,14 +63,6 @@ set splitright                  " feels more natural than Vim's default
 
 " Toggle show/hide invisible chars
 nnoremap <leader>i :set list!<cr>
-
-" Toggle line numbers
-nnoremap <leader>N :setlocal number!<cr>
-
-" Thanks to Steve Losh for this liberating tip
-" See http://stevelosh.com/blog/2010/09/coming-home-to-vim
-" nnoremap / /\v
-" vnoremap / /\v
 
 " Speed up scrolling of the viewport slightly
 nnoremap <C-e> 2<C-e>
@@ -136,7 +117,7 @@ set noerrorbells                " don't beep
 set showcmd                     " show (partial) command in the last line of the screen
                                 "    this also shows visual selection info
 set nomodeline                  " disable mode lines (security measure)
-"set ttyfast                     " always use a fast terminal
+set ttyfast                     " always use a fast terminal
 set cursorline                  " underline the current line, for quick orientation
 " }}}
 
@@ -268,11 +249,6 @@ au filetype vim set formatoptions-=o
                      " for vim files, so explicitly unset it again
 " }}}
 
-"set guifont=Anonymous\ for\ Powerline:h12 linespace=2
-"set guifont=Droid\ Sans\ Mono:h14 linespace=0
-"set guifont=Mensch\ for\ Powerline:h14 linespace=0
-"set guifont=saxMono:h14 linespace=3
-"set guifont=Ubuntu\ Mono:h18 linespace=3
 set guifont=Source\ Code\ Pro\ Light:h10 linespace=0
 
 if has("gui_running")
@@ -287,10 +263,6 @@ else
     set bg=dark
 endif
 
-"colorscheme mustang
-"colorscheme mustang_silent
-"colorscheme wombat256
-"colorscheme jellygrass
 colorscheme jellybeans
 
 " Pulse ------------------------------------------------------------------- {{{
