@@ -268,10 +268,6 @@ au filetype vim set formatoptions-=o
                      " for vim files, so explicitly unset it again
 " }}}
 
-" Extra user or machine specific settings {{{
-source ~/.vim/user.vim
-" }}}
-
 "set guifont=Anonymous\ for\ Powerline:h12 linespace=2
 "set guifont=Droid\ Sans\ Mono:h14 linespace=0
 "set guifont=Mensch\ for\ Powerline:h14 linespace=0
