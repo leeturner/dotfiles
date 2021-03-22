@@ -27,7 +27,12 @@ set shell=bash                  " Vim expects a POSIX-compliant shell, which Fis
 let mapleader=","
 let maplocalleader="\\"
 
-" Editing behaviour {{{
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 20
+
 set showmode                    " always show what mode we're currently editing in
 set nowrap                      " don't wrap lines
 set colorcolumn=85              " show a coloured column at 85 characters
@@ -44,66 +49,27 @@ set showmatch                   " set show matching parenthesis
 set ignorecase                  " ignore case when searching
 set smartcase                   " ignore case if search pattern is all lowercase, case-sensitive otherwise
 set smarttab                    " insert tabs on the start of a line according to shiftwidth, not tabstop
-set scrolloff=5                 " keep 4 lines off the edges of the screen when scrolling
-set virtualedit=all             " allow the cursor to go in to "invalid" places
+set scrolloff=10                " keep 4 lines off the edges of the screen when scrolling
+set virtualedit=all             " allow the cursor to go in to 'invalid' places
 set hlsearch                    " highlight search terms
 set incsearch                   " show search matches as you type
-set gdefault                    " search/replace "globally" (on a line) by default
-set listchars=tab:▸\ ,trail:·,extends:#,nbsp:·
-
-set nolist                      " don't show invisible characters by default,
-                                " but it is enabled for some file types (see later)
-set pastetoggle=<F2>            " when in insert mode, press <F2> to go to
-                                "    paste mode, where you can paste mass data
-                                "    that won't be autoindented
-set mouse=a                     " enable using the mouse if terminal emulator
-                                "    supports it (xterm does)
+set gdefault                    " search/replace 'globally' (on a line) by default
+set showbreak=↪\                " character to show when a line wraps onto the next line
+set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
+set list                        " show invisible characters by default. see listchars
+set mouse=a                     " enable using the mouse if terminal emulator supports it (xterm does)
 set fileformats="unix,dos,mac"
 set formatoptions+=1            " When wrapping paragraphs, don't end lines
-                                "    with 1-letter words (looks stupid)
-
-set nrformats=                  " make <C-a> and <C-x> play well with
-                                "    zero-padded numbers (i.e. don't consider
-                                "    them octal or hex)
-
 set shortmess+=I                " hide the launch screen
 set clipboard=unnamedplus       " normal OS clipboard interaction on Linux
 set autoread                    " automatically reload files changed outside of Vim
 set splitbelow                  " open split panes to the right and bottom which
 set splitright                  " feels more natural than Vim's default
-
-" Toggle show/hide invisible chars
-nnoremap <leader>i :set list!<cr>
-
-" Toggle line numbers
-nnoremap <leader>N :setlocal number!<cr>
-
-" Thanks to Steve Losh for this liberating tip
-" See http://stevelosh.com/blog/2010/09/coming-home-to-vim
-" nnoremap / /\v
-" vnoremap / /\v
-
-" Speed up scrolling of the viewport slightly
-nnoremap <C-e> 2<C-e>
-nnoremap <C-y> 2<C-y>
-
-" Speed up the navigation between splits
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-" }}}
-
-" Editor layout {{{
 set termencoding=utf-8
 set encoding=utf-8
 set lazyredraw                  " don't update the display while executing macros
-set laststatus=2                " tell VIM to always put a status line in, even
-                                "    if there is only one window
+set laststatus=2                " tell VIM to always put a status line in, even if there is only one window
 set cmdheight=2                 " use a status bar that is 2 rows high
-" }}}
-
-" Vim behaviour {{{
 set hidden                      " hide buffers instead of closing them this
                                 "    means that the current buffer can be put
                                 "    to background without being written; and
@@ -136,36 +102,62 @@ set noerrorbells                " don't beep
 set showcmd                     " show (partial) command in the last line of the screen
                                 "    this also shows visual selection info
 set nomodeline                  " disable mode lines (security measure)
-"set ttyfast                     " always use a fast terminal
+set ttyfast                     " always use a fast terminal
 set cursorline                  " underline the current line, for quick orientation
-" }}}
 
-" Toggle the quickfix window {{{
-" From Steve Losh, http://learnvimscriptthehardway.stevelosh.com/chapters/38.html
-nnoremap <C-q> :call <SID>QuickfixToggle()<cr>
-
-let g:quickfix_is_open = 0
-
-function! s:QuickfixToggle()
-    if g:quickfix_is_open
-        cclose
-        let g:quickfix_is_open = 0
-        execute g:quickfix_return_to_window . "wincmd w"
-    else
-        let g:quickfix_return_to_window = winnr()
-        copen
-        let g:quickfix_is_open = 1
-    endif
-endfunction
-" }}}
-
-" Highlighting {{{
 if &t_Co > 2 || has("gui_running")
    syntax on                    " switch syntax highlighting on, when the terminal has colors
 endif
-" }}}
 
-" Shortcut mappings {{{
+" Common abbreviations / misspellings
+source ~/.vim/autocorrect.vim
+
+" set extra vi-compatible options
+set cpoptions+=$     " when changing a line, don't redisplay, but put a '$' at
+                     " the end during the change
+set formatoptions-=o " don't start new lines w/ comment leader on pressing 'o'
+au filetype vim set formatoptions-=o
+                     " somehow, during vim filetype detection, this gets set
+                     " for vim files, so explicitly unset it again
+
+set guifont=Source\ Code\ Pro\ Light:h10 linespace=0
+
+if has("gui_running")
+    " Remove toolbar, left scrollbar and right scrollbar
+    set guioptions-=T
+    set guioptions-=l
+    set guioptions-=L
+    set guioptions-=r
+    set guioptions-=R
+    set guifont=Source\ Code\ Pro\ Light:h13 linespace=0
+else
+    set bg=dark
+endif
+
+colorscheme jellybeans
+
+let g:jellybeans_overrides = {
+\    'background': { 'guibg': '000000' },
+\}
+
+" Ignore common directories
+let g:ctrlp_custom_ignore = {
+   \ 'dir': 'node_modules\|bower_components',
+   \ }
+
+" Toggle show/hide invisible chars
+nnoremap <leader>i :set list!<cr>
+
+" Speed up scrolling of the viewport slightly
+nnoremap <C-e> 2<C-e>
+nnoremap <C-y> 2<C-y>
+
+" Speed up the navigation between splits
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
 " Avoid accidental hits of <F1> while aiming for <Esc>
 noremap! <F1> <Esc>
 
@@ -201,17 +193,10 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
-" nnoremap <leader>w <C-w>v<C-w>l
 
 " Complete whole filenames/lines with a quicker shortcut key in insert mode
 inoremap <C-f> <C-x><C-f>
 inoremap <C-l> <C-x><C-l>
-
-" Use ,d (or ,dd or ,dj or 20,dd) to delete a line without adding it to the
-" yanked stack (also, in visual mode)
-nnoremap <silent> <leader>d "_d
-vnoremap <silent> <leader>d "_d
-" vnoremap <silent> x "_x  TODODODOOo
 
 " Quick yanking to the end of the line
 nnoremap Y y$
@@ -223,19 +208,12 @@ nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
 " Clears the search register
 nnoremap <silent> <leader>/ :nohlsearch<CR>
 
-" Keep search matches in the middle of the window and pulse the line when moving
-" to them.
-nnoremap n n:call PulseCursorLine()<cr>
-nnoremap N N:call PulseCursorLine()<cr>
-
 " Quickly get out of insert mode without your fingers having to leave the
 " home row (either use 'jj' or 'jk')
 inoremap jj <Esc>
 
-" Quick alignment of text
-" nnoremap <leader>al :left<CR>
-" nnoremap <leader>ar :right<CR>
-" nnoremap <leader>ac :center<CR>
+nnoremap <leader>1 :NERDTreeToggle<CR>
+" nnoremap <leader>1 :Vexplore<CR>
 
 " Jump to matching pairs easily, with Tab
 nnoremap <Tab> %
@@ -245,105 +223,8 @@ vnoremap <Tab> %
 nnoremap <Space> za
 vnoremap <Space> za
 
-" }}}
-
-" Restore cursor position upon reopening files {{{
-autocmd BufReadPost *
-    \ if &filetype != "gitcommit" && line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
-    \ endif
-" }}}
-
-" Common abbreviations / misspellings {{{
-source ~/.vim/autocorrect.vim
-" }}}
-
-" Extra vi-compatibility {{{
-" set extra vi-compatible options
-set cpoptions+=$     " when changing a line, don't redisplay, but put a '$' at
-                     " the end during the change
-set formatoptions-=o " don't start new lines w/ comment leader on pressing 'o'
-au filetype vim set formatoptions-=o
-                     " somehow, during vim filetype detection, this gets set
-                     " for vim files, so explicitly unset it again
-" }}}
-
-" Extra user or machine specific settings {{{
-source ~/.vim/user.vim
-" }}}
-
-"set guifont=Anonymous\ for\ Powerline:h12 linespace=2
-"set guifont=Droid\ Sans\ Mono:h14 linespace=0
-"set guifont=Mensch\ for\ Powerline:h14 linespace=0
-"set guifont=saxMono:h14 linespace=3
-"set guifont=Ubuntu\ Mono:h18 linespace=3
-set guifont=Source\ Code\ Pro\ Light:h10 linespace=0
-
-if has("gui_running")
-    " Remove toolbar, left scrollbar and right scrollbar
-    set guioptions-=T
-    set guioptions-=l
-    set guioptions-=L
-    set guioptions-=r
-    set guioptions-=R
-    set guifont=Source\ Code\ Pro\ Light:h13 linespace=0
-else
-    set bg=dark
-endif
-
-"colorscheme mustang
-"colorscheme mustang_silent
-"colorscheme wombat256
-"colorscheme jellygrass
-colorscheme jellybeans
-
-" Pulse ------------------------------------------------------------------- {{{
-
-function! PulseCursorLine()
-    let current_window = winnr()
-
-    windo set nocursorline
-    execute current_window . 'wincmd w'
-
-    setlocal cursorline
-
-    redir => old_hi
-        silent execute 'hi CursorLine'
-    redir END
-    let old_hi = split(old_hi, '\n')[0]
-    let old_hi = substitute(old_hi, 'xxx', '', '')
-
-    hi CursorLine guibg=#3a3a3a
-    redraw
-    sleep 20m
-
-    hi CursorLine guibg=#4a4a4a
-    redraw
-    sleep 30m
-
-    hi CursorLine guibg=#3a3a3a
-    redraw
-    sleep 30m
-
-    hi CursorLine guibg=#2a2a2a
-    redraw
-    sleep 20m
-
-    execute 'hi ' . old_hi
-
-    windo set cursorline
-    execute current_window . 'wincmd w'
-endfunction
-
-" }}}
-
-" Ignore common directories
-let g:ctrlp_custom_ignore = {
-   \ 'dir': 'node_modules\|bower_components',
-   \ }
-
 " Invoke CtrlP, but CommandT style
-nnoremap <leader>t :CtrlP<cr>
+nnoremap <leader>e :CtrlP<cr>
 nnoremap <leader>. :CtrlPTag<cr>
 nnoremap <leader>b :CtrlPBuffer<cr>
 
@@ -366,17 +247,9 @@ nnoremap H 0
 nnoremap L $
 
 " open a new vertical split and switch over to it.
-nnoremap <leader>w <C-w>v<C-w>l
-
-" Switch from block-cursor to vertical-line-cursor when going into/out of
-" insert mode
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+noremap <leader>w <C-w>v<C-w>l
 
 " Highlight the colour of the coloumcolur bar on GUI and non-gui
 hi ColorColumn guibg=darkgrey
 hi ColorColumn ctermbg=8
 
-let g:jellybeans_overrides = {
-\    'background': { 'guibg': '000000' },
-\}
