@@ -61,7 +61,7 @@ set mouse=a                     " enable using the mouse if terminal emulator su
 set fileformats="unix,dos,mac"
 set formatoptions+=1            " When wrapping paragraphs, don't end lines
 set shortmess+=I                " hide the launch screen
-set clipboard=unnamedplus       " normal OS clipboard interaction on Linux
+" set clipboard=unnamedplus       " normal OS clipboard interaction on Linux
 set autoread                    " automatically reload files changed outside of Vim
 set splitbelow                  " open split panes to the right and bottom which
 set splitright                  " feels more natural than Vim's default
@@ -104,6 +104,7 @@ set showcmd                     " show (partial) command in the last line of the
 set nomodeline                  " disable mode lines (security measure)
 set ttyfast                     " always use a fast terminal
 set cursorline                  " underline the current line, for quick orientation
+set updatetime=100              " set updatetme to 100ms rather than 4s
 
 if &t_Co > 2 || has("gui_running")
    syntax on                    " switch syntax highlighting on, when the terminal has colors

@@ -22,3 +22,12 @@
 [submodule "vim/bundle/vim-vinegar"]
 	path = vim/bundle/vim-vinegar
 	url = https://github.com/tpope/vim-vinegar.git
+[submodule "vim/bundle/vim-airline"]
+	path = vim/bundle/vim-airline
+	url = https://github.com/vim-airline/vim-airline.git
+[submodule "vim/bundle/vim-gitgutter"]
+	path = vim/bundle/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
+[submodule "vim/bundle/kotlin-vim"]
+	path = vim/bundle/kotlin-vim
+	url = https://github.com/udalov/kotlin-vim
