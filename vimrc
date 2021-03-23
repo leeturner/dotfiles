@@ -49,7 +49,7 @@ set showmatch                   " set show matching parenthesis
 set ignorecase                  " ignore case when searching
 set smartcase                   " ignore case if search pattern is all lowercase, case-sensitive otherwise
 set smarttab                    " insert tabs on the start of a line according to shiftwidth, not tabstop
-set scrolloff=10                " keep 4 lines off the edges of the screen when scrolling
+set scrolloff=10                " keep 10 lines off the edges of the screen when scrolling
 set virtualedit=all             " allow the cursor to go in to 'invalid' places
 set hlsearch                    " highlight search terms
 set incsearch                   " show search matches as you type
@@ -61,7 +61,6 @@ set mouse=a                     " enable using the mouse if terminal emulator su
 set fileformats="unix,dos,mac"
 set formatoptions+=1            " When wrapping paragraphs, don't end lines
 set shortmess+=I                " hide the launch screen
-" set clipboard=unnamedplus       " normal OS clipboard interaction on Linux
 set autoread                    " automatically reload files changed outside of Vim
 set splitbelow                  " open split panes to the right and bottom which
 set splitright                  " feels more natural than Vim's default
@@ -251,6 +250,7 @@ nnoremap L $
 noremap <leader>w <C-w>v<C-w>l
 
 " Highlight the colour of the coloumcolur bar on GUI and non-gui
+hi CursorLine  term=bold cterm=bold ctermfg=white guifg=white
 hi ColorColumn guibg=darkgrey
 hi ColorColumn ctermbg=8
 
