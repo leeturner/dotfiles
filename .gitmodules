@@ -31,3 +31,9 @@
 [submodule "vim/bundle/kotlin-vim"]
 	path = vim/bundle/kotlin-vim
 	url = https://github.com/udalov/kotlin-vim
+[submodule "vim/bundle/vim-go"]
+	path = vim/bundle/vim-go
+	url = https://github.com/fatih/vim-go.git
+[submodule "vim/bundle/vim-diminactive"]
+	path = vim/bundle/vim-diminactive
+	url = https://github.com/blueyed/vim-diminactive.git
