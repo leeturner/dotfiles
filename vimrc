@@ -219,6 +219,10 @@ nnoremap <leader>1 :NERDTreeToggle<CR>
 nnoremap <Tab> %
 vnoremap <Tab> %
 
+" Show next matched string at the center of the screen
+noremap n nzz
+noremap N Nzz
+
 " Folding
 nnoremap <Space> za
 vnoremap <Space> za
