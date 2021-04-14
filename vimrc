@@ -41,6 +41,7 @@ set softtabstop=4               " when hitting <BS>, pretend like a tab is remov
 set shiftwidth=4                " number of spaces to use for autoindenting
 set expandtab                   " expand tabs by default (overloadable per file type later)
 set shiftround                  " use multiple of shiftwidth when indenting with '<' and '>'
+set background=dark             " Use colors that suit a dark background.
 set backspace=indent,eol,start  " allow backspacing over everything in insert mode
 set autoindent                  " always set autoindenting on
 set copyindent                  " copy the previous indentation on autoindenting
@@ -211,6 +212,8 @@ nnoremap <silent> <leader>/ :nohlsearch<CR>
 " Quickly get out of insert mode without your fingers having to leave the
 " home row (either use 'jj' or 'jk')
 inoremap jj <Esc>
+inoremap jk <Esc>
+inoremap kj <Esc>
 
 nnoremap <leader>1 :NERDTreeToggle<CR>
 " nnoremap <leader>1 :Vexplore<CR>
