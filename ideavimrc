@@ -1,6 +1,6 @@
 source ~/.vimrc
 
-""" Plugins
+""" Plugins 
 set surround
 set commentary
 set argtextobj
@@ -13,12 +13,17 @@ set textobj-entire
 set highlightedyank
 set vim-paragraph-motion
 
+""" Plugin settings 
 let g:highlightedyank_highlight_duration = "1000"
 
-""" Idea specific settings ------------------
+""" Idea specific settings 
 set ideajoin
 set ideamarks
 set ideastatusicon=gray
 set idearefactormode=keep
 set showmode
 
+""" Mappings
+map <leader>r <Action>(RenameElement)
+map <leader>z <Action>(ToggleDistractionFreeMode)
+map <leader>b <Action>(ToggleLineBreakpoint)
