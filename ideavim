@@ -1,0 +1,24 @@
+source ~/.vimrc
+
+""" Plugins
+set surround
+set commentary
+set argtextobj
+set multiple-cursors
+set exchange
+set virtualedit=onemore
+set NERDTree
+set easymotion
+set textobj-entire
+set highlightedyank
+set vim-paragraph-motion
+
+let g:highlightedyank_highlight_duration = "1000"
+
+""" Idea specific settings ------------------
+set ideajoin
+set ideamarks
+set ideastatusicon=gray
+set idearefactormode=keep
+set showmode
+
