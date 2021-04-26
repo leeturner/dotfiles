@@ -1,15 +1,20 @@
 source ~/.vimrc
 
-""" Plugins 
+""" Plugins
+" ys, cs, ds, S
 set surround
+" gcc, gc + motion, v_gc
 set commentary
+" argument text objects: aa, ia
 set argtextobj
-set multiple-cursors
+" cx{motion} to select, again to exchange
 set exchange
+" entire buffer text object: ae
+set textobj-entire
+set multiple-cursors
 set virtualedit=onemore
 set NERDTree
 set easymotion
-set textobj-entire
 set highlightedyank
 set vim-paragraph-motion
 
@@ -28,3 +33,6 @@ map <leader>r <Action>(RenameElement)
 map <leader>d <Action>(ChooseDebugConfiguration)
 map <leader>z <Action>(ToggleDistractionFreeMode)
 map <leader>b <Action>(ToggleLineBreakpoint)
+
+""" IdeaVim development stuff
+set ideastrictmode
