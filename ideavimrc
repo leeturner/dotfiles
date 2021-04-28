@@ -25,6 +25,7 @@ set showmode
 
 """ Mappings
 map <leader>r <Action>(RenameElement)
+map <leader>t <Action>(GotoTest)
 map <leader>d <Action>(ChooseDebugConfiguration)
 map <leader>z <Action>(ToggleDistractionFreeMode)
 map <leader>b <Action>(ToggleLineBreakpoint)
