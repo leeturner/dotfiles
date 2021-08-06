@@ -17,6 +17,7 @@ set NERDTree
 set easymotion
 set highlightedyank
 set vim-paragraph-motion
+set vim-indent-object
 
 """ Plugin settings 
 let g:highlightedyank_highlight_duration = "1000"
@@ -27,6 +28,7 @@ set ideamarks
 set ideastatusicon=gray
 set idearefactormode=keep
 set showmode
+
 
 """ Mappings
 map <leader>r <Action>(RenameElement)
