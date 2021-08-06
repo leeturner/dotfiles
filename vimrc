@@ -256,6 +256,10 @@ nnoremap L $
 " open a new vertical split and switch over to it.
 noremap <leader>w <C-w>v<C-w>l
 
+" Make Y behave like C and D
+nnoremap Y y$
+
+
 " Highlight the colour of the coloumcolur bar on GUI and non-gui
 hi CursorLine  term=bold cterm=bold 
 hi ColorColumn guibg=darkgrey
