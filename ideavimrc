@@ -17,6 +17,7 @@ set NERDTree
 set easymotion
 set highlightedyank
 set vim-paragraph-motion
+set textobj-indent
 
 """ Plugin settings 
 let g:highlightedyank_highlight_duration = "1000"
@@ -35,6 +36,7 @@ map <leader>i <Action>(GotoImplementation)
 map <leader>d <Action>(ChooseDebugConfiguration)
 map <leader>z <Action>(ToggleDistractionFreeMode)
 map <leader>b <Action>(ToggleLineBreakpoint)
+map <leader>f <Action>(FindInPath)
 
 """ IdeaVim development stuff
 set ideastrictmode
