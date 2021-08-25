@@ -17,11 +17,8 @@ set NERDTree
 set easymotion
 set highlightedyank
 set vim-paragraph-motion
-<<<<<<< HEAD
 set textobj-indent
-=======
 set vim-indent-object
->>>>>>> 32132a053d82b413b9acad17ac92cd36dc62e074
 
 """ Plugin settings 
 let g:highlightedyank_highlight_duration = "1000"
