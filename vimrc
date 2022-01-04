@@ -24,7 +24,7 @@ syntax on
 set shell=bash                  " Vim expects a POSIX-compliant shell, which Fish (my default shell) is not
 
 " Change the mapleader from \ to ,
-let mapleader=","
+let mapleader=" "
 let maplocalleader="\\"
 
 let g:netrw_banner = 0
