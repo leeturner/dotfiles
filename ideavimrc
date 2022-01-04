@@ -1,7 +1,12 @@
 source ~/.vimrc
 
-""" Plugins
-" ys, cs, ds, S
+set clipboard+=unnamed
+set clipboard+=ideaput
+nnoremap \e :e ~/.ideavimrc<CR>
+nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
+
+""" Plugin
+" ys, cs, ds,  S
 set surround
 " gcc, gc + motion, v_gc
 set commentary
@@ -39,6 +44,13 @@ map <leader>d <Action>(ChooseDebugConfiguration)
 map <leader>z <Action>(ToggleDistractionFreeMode)
 map <leader>b <Action>(ToggleLineBreakpoint)
 map <leader>f <Action>(FindInPath)
+
+map <leader>m <Action>(MaximizeEditorInSplit)
+map <C-w>m <Action>(MaximizeEditorInSplit)
+map <C-w>+ <Action>(StretchSplitToTop)
+map <C-w>- <Action>(StretchSplitToBottom)
+map <C-w>< <Action>(StretchSplitToLeft)
+map <C-w>> <Action>(StretchSplitToRight)
 
 """ IdeaVim development stuff
 set ideastrictmode
