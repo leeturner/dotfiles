@@ -9,7 +9,7 @@ nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
 " ys, cs, ds,  S
 set surround
 " gcc, gc + motion, v_gc
-" set commentary
+set commentary
 " argument text objects: aa, ia
 set argtextobj
 " cx{motion} to select, again to exchange
@@ -37,6 +37,7 @@ set showmode
 
 """ Mappings
 map <c-z> <Action>(ToggleDistractionFreeMode)
+nnoremap Q :action CloseProject<CR>
 
 """ Window Navigation and Splits
 map <c-\> <Action>(SplitVertically)
@@ -91,12 +92,13 @@ nnoremap <leader>u :action FindUsages<CR>
 nnoremap <leader>h :action CallHierarchy<CR>
 nnoremap <c-s> :action FileStructurePopup<CR>
 
-""" Testing and Debugging
+""" Building, Testing and Debugging
 nnoremap ,t :action ActivateDebugToolWindow<CR>
 nnoremap ,f :action ChooseDebugConfiguration<CR>
 nnoremap ,d :action ContextDebug<CR>
 nnoremap ,u :action Rerun<CR>
 nnoremap ,b :action ToggleLineBreakpoint<CR>
+map <leader>m <Action>(Maven.ExecuteGoal)
 
 """ IdeaVim development stuff
 set ideastrictmode
