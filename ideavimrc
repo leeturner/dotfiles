@@ -98,7 +98,7 @@ nnoremap ,f :action ChooseDebugConfiguration<CR>
 nnoremap ,d :action ContextDebug<CR>
 nnoremap ,u :action Rerun<CR>
 nnoremap ,b :action ToggleLineBreakpoint<CR>
-map <leader>m <Action>(Maven.ExecuteGoal)
+map <leader>m <Action>(RunAnything)
 
 """ IdeaVim development stuff
 set ideastrictmode
