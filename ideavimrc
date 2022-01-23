@@ -44,7 +44,6 @@ map <c-\> <Action>(SplitVertically)
 map <c--> <Action>(SplitHorizontally)
 map <c-=> <Action>(UnsplitAll)
 map <leader>en <Action>(EditSourceInNewWindow)
-map <c-x> (action)(HideAllWindows)
 nnoremap <c-x> :action HideAllWindows<CR>
 map <c-w>m <Action>(MaximizeEditorInSplit)
 map <c-w>+ <Action>(StretchSplitToTop)
