@@ -1,24 +1,24 @@
 [submodule "vim/vim/bundle/taskpaper.vim"]
 	path = vim/vim/bundle/taskpaper.vim
-	url = git://github.com/davidoc/taskpaper.vim.git 
+	url = https://github.com/davidoc/taskpaper.vim
 [submodule "vim/vim/bundle/nerdcommenter"]
 	path = vim/vim/bundle/nerdcommenter
-	url = git://github.com/scrooloose/nerdcommenter.git 
+	url = https://github.com/scrooloose/nerdcommenter.git 
 [submodule "vim/vim/bundle/nerdtree"]
 	path = vim/vim/bundle/nerdtree
-	url = git://github.com/scrooloose/nerdtree.git 
+	url = https://github.com/scrooloose/nerdtree.git 
 [submodule "vim/vim/bundle/vim-fugitive"]
 	path = vim/vim/bundle/vim-fugitive
-	url = git://github.com/tpope/vim-fugitive.git 
+	url = https://github.com/tpope/vim-fugitive.git 
 [submodule "vim/vim/bundle/ctrlp.vim"]
 	path = vim/vim/bundle/ctrlp.vim
-	url = git://github.com/ctrlpvim/ctrlp.vim.git 
+	url = https://github.com/ctrlpvim/ctrlp.vim.git 
 [submodule "vim/vim/bundle/vim-unimpaired"]
 	path = vim/vim/bundle/vim-unimpaired
-	url = git://github.com/tpope/vim-unimpaired.git
+	url = https://github.com/tpope/vim-unimpaired.git
 [submodule "vim/vim/bundle/vim-repeat"]
 	path = vim/vim/bundle/vim-repeat
-	url = git://github.com/tpope/vim-repeat.git
+	url = https://github.com/tpope/vim-repeat.git
 [submodule "vim/vim/bundle/vim-vinegar"]
 	path = vim/vim/bundle/vim-vinegar
 	url = https://github.com/tpope/vim-vinegar.git
