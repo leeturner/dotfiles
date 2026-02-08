@@ -1,0 +1,4 @@
+---
+"workspace:activate_first_tab": cmd-1
+"terminal:bookmark_selected_block": f3
+"workspace:show_command_search": ctrl-r
