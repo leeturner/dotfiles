@@ -1,0 +1,5 @@
+font-family = Hack Nerd Font Mono
+
+keybind = shift+enter=text:\x1b\r
+
+background-opacity = 0.5

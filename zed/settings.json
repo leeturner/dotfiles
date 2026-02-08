@@ -1,0 +1,42 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "features": {
+    "inline_completion_provider": "zed"
+  },
+  "base_keymap": "JetBrains",
+  "theme": "Catppuccin Mocha",
+  // "theme": "Ayu Mirage",
+  "telemetry": {
+    "metrics": false
+  },
+  "vim_mode": true,
+  "ui_font_size": 13,
+  "buffer_font_size": 13,
+  "buffer_font_family": "Zed Mono",
+  // use relative line numbers
+  "relative_line_numbers": true,
+  // allow cursor to reach edges of screen
+  "vertical_scroll_margin": 8,
+  "show_whitespaces": "none",
+  "tab_bar": {
+    "show": false
+  },
+  // Git gutter behavior configuration.
+  "git": {
+    // Control whether the git blame information is shown inline,
+    // in the currently focused line.
+    "inline_blame": {
+      "enabled": false
+      // Sets a delay after which the inline blame information is shown.
+      // Delay is restarted with every cursor movement.
+      // "delay_ms": 600
+    }
+  }
+}
