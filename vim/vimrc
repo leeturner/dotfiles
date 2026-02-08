@@ -103,6 +103,7 @@ set nomodeline                  " disable mode lines (security measure)
 set ttyfast                     " always use a fast terminal
 set cursorline                  " underline the current line, for quick orientation
 set updatetime=100              " set updatetme to 100ms rather than 4s
+set termguicolors
 
 if &t_Co > 2 || has("gui_running")
    syntax on                    " switch syntax highlighting on, when the terminal has colors
@@ -133,7 +134,7 @@ else
     set bg=dark
 endif
 
-colorscheme jellybeans
+colorscheme embark
 
 let g:jellybeans_overrides = {
 \    'background': { 'guibg': '000000' },

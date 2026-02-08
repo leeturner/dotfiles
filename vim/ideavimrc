@@ -23,28 +23,54 @@ Plug 'easymotion/vim-easymotion'
 Plug 'machakann/vim-highlightedyank'
 Plug 'dbakker/vim-paragraph-motion'
 Plug 'michaeljsmith/vim-indent-object'
+Plug 'justinmk/vim-sneak'
+Plug 'inkarkat/vim-ReplaceWithRegister'
 
 """ Plugin settings 
 let g:highlightedyank_highlight_duration = "1000"
 
+set handler=vim
+
+xnoremap <Space> <Nop>
+nnoremap <Space> <Nop>
+let mapleader = " "
+
+set which-key
+" increase the timeoutlen (default: 1000), don't add space around the equal sign
+set timeoutlen=8000
+
 """ Idea specific settings
 set ideajoin
 set ideamarks
+set ideawrite
 set ideastatusicon=gray
 set idearefactormode=keep
 set showmode
+" set quickscope
+
+"-- New line in normal mode
+nnoremap <a-o> mao<ESC>`a
+nnoremap <a-s-o> maO<ESC>`a
 
 """ Mappings
 map <c-z> <Action>(ToggleDistractionFreeMode)
-nnoremap Q :action CloseProject<CR>
+nnoremap ZZ :action CloseProject<CR>
 
 """ Window Navigation and Splits
-map <c-\> <Action>(SplitVertically)
-map <c--> <Action>(SplitHorizontally)
-map <c-=> <Action>(UnsplitAll)
+map <Leader>sv <Action>(SplitVertically)
+map <Leader>sh <Action>(SplitHorizontally)
+map <leader>sx <Action>(CloseContent)
+map <leader>ss <Action>(UnsplitAll)
+map <leader>sm <Action>(MaximizeEditorInSplit)
+
+" Switch between splits
+map <Leader>wh <c-w>h
+map <Leader>wl <c-w>l
+map <Leader>wj <c-w>j
+map <Leader>wk <c-w>k
+
 map <leader>en <Action>(EditSourceInNewWindow)
 nnoremap <c-x> :action HideAllWindows<CR>
-map <c-w>m <Action>(MaximizeEditorInSplit)
 map <c-w>+ <Action>(StretchSplitToTop)
 map <c-w>- <Action>(StretchSplitToBottom)
 map <c-w>< <Action>(StretchSplitToLeft)
@@ -61,40 +87,108 @@ map ]] <Action>(MethodDown)
 """ Collapse different regions
 map zc <Action>(CollapseRegion)
 map zo <Action>(ExpandRegion)
-map <leader>zc <Action>(CollapseAllRegions)
-map <leader>zo <Action>(ExpandAllRegions)
+map zm <Action>(CollapseAllRegions)
+map zr <Action>(ExpandAllRegions)
+
+" Git leader g
+map <leader>gf <Action>(Git.Fetch)
+map <leader>gp <Action>(Vcs.UpdateProject)
+map <leader>gP <Action>(Vcs.Push)
+map <leader>gco <Action>(GitCheckoutFromInputAction)
+map <leader>gcm <Action>(CheckinProject)
+map <leader>gb <Action>(Git.CreateNewBranch)
+
+" Bookmarks (leader b)
+nnoremap <leader>bb :action ToggleBookmark<cr>
+nnoremap <leader>be :action EditBookmark<cr>
+nnoremap <leader>bp :action GotoPreviousBookmark<cr>
+nnoremap <leader>bn :action GotoNextBookmark<cr>
 
 map <leader>r <Action>(Refactorings.QuickListPopupAction)
 map <leader>= <Action>(ReformatCode)
 map <leader>o <Action>(OptimizeImports)
 
-map <c-r> <Action>(RecentFiles)
 map <leader>l <Action>(RecentLocations)
 map <leader>h <Action>(LocalHistory.ShowHistory)
 
-nnoremap <c-/> :action FindInPath<CR>
-nnoremap <c-c> :action GotoClass<CR>
-nnoremap <c-f> :action GotoFile<CR>
-nnoremap <c-o> :action GotoSymbol<CR>
+" Find (leader f)
+map <leader>ff <Action>(GotoFile)
+map <leader>fc <Action>(GotoClass)
+map <leader>fa <Action>(GotoAction)
+map <leader>fp <Action>(RecentProjectListGroup)
+map <leader>fr <Action>(RecentFiles)
+map <leader>fw <Action>(FindInPath)
+map <leader>fb <Action>(ShowBookmarks)
+map <leader>ft <Action>(ActivateTODOToolWindow)
 
+" Views (leader v)
+map <leader>vf :action ActivateProjectToolWindow<cr>
+map <leader>vp :action ActivateProblemsViewToolWindow<cr>
+map <leader>vs :action ActivateStructureToolWindow<cr>
+map <leader>vt :action ActivateTerminalToolWindow<cr>
+map <leader>vv :action ActivateServicesToolWindow<cr>
+map <leader>vd :action ActivateDebugToolWindow<cr>
+map <leader>vg :action ActivateVersionControlToolWindow<cr>
+map <leader>vo :action ActivateTODOToolWindow<cr>
+map <leader>vc :action ActivateGitHubCopilotChatToolWindow<cr>
+map <leader>vb :action ActivateBookmarksToolWindow<cr>
+map <leader>vq :action CloseActiveTab<cr>
+
+" Debug (leader d)
+nnoremap <leader>de :action Debug<cr>
+nnoremap <leader>dE :action ChooseDebugConfiguration<cr>
+nnoremap <leader>dr :action Run<cr>
+nnoremap <leader>dR :action ChooseRunConfiguration<cr>
+nnoremap <leader>dk :action Stop<cr>
+nnoremap <leader>db :action ToggleLineBreakpoint<cr>
+nnoremap <leader>dm :action XDebugger.MuteBreakpoints<cr>
+nnoremap <leader>dd :action Debugger.RemoveAllBreakpoints<cr>
+nnoremap <leader>dv :action StepOver<cr>
+nnoremap <leader>di :action StepInto<cr>
+nnoremap <leader>do :action StepOut<cr>
+nnoremap <leader>dc :action Resume<cr>
+
+" Refactoring (leader r)
+map <leader>re :action Refactorings.QuickListPopupAction<CR>
+map <leader>rn :action RenameElement<cr>
+map <leader>rv :action IntroduceVariable<cr>
+map <leader>rc :action IntroduceConstant<cr>
+map <leader>rf :action IntroduceField<cr>
+map <leader>rp :action IntroduceParameter<cr>
+map <leader>rx :action ExtractMethod<cr>
+map <leader>ri :action Inline<cr>
+map <leader>rs :action ChangeSignature<cr>
+map <leader>ra :action AnonymousToInner<cr>
+map <leader>rm :action Move<cr>
+
+map <leader>dx :action QuickEvaluateExpression<cr>
+map <leader>dt :action EvaluateExpression<cr>
+map <leader>dw :action Debugger.AddToWatch<cr>
+
+" Go to
 map ge <Action>(GotoNextError)
 map gE <Action>(GotoPreviousError)
 nnoremap gi :action GotoImplementation<CR>
 nnoremap gd :action GotoDeclaration<CR>
-nnoremap gp :action GotoSuperMethod<CR>
+nnoremap gs :action GotoSuperMethod<CR>
 nnoremap gt :action GotoTest<CR>
 nnoremap gb :action Back<CR>
 nnoremap gf :action Forward<CR>
 
-nnoremap <leader>u :action FindUsages<CR>
-nnoremap <leader>h :action CallHierarchy<CR>
-nnoremap <c-s> :action FileStructurePopup<CR>
+vmap K :action MoveLineUp<CR>
+vmap J :action MoveLineDown<CR>
+
+nmap gS <Action>(FileStructurePopup)
+nmap gu <Action>(ShowUsages)
+nmap gh <Action>(CallHierarchy)
+nmap gU <Action>(FindUsages)
 
 """ Building, Testing and Debugging
 nnoremap ,t :action ActivateDebugToolWindow<CR>
 nnoremap ,f :action ChooseDebugConfiguration<CR>
+nnoremap ,r :action ChooseRunConfiguration<CR>
 nnoremap ,d :action ContextDebug<CR>
-nnoremap ,u :action Rerun<CR>
+nnoremap ,u :action Debug<CR>
 nnoremap ,b :action ToggleLineBreakpoint<CR>
 map <leader>m <Action>(RunAnything)
 
@@ -105,4 +199,3 @@ set ideastrictmode
 map mc <A-n>
 map mx <A-x>
 map mp <A-p>
-
