@@ -1,0 +1,25 @@
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-e": "file_finder::Toggle",
+      "cmd-shift-p": "command_palette::Toggle",
+      "cmd-shift-m": "diagnostics::Deploy",
+      "cmd-shift-e": "project_panel::ToggleFocus",
+      "cmd-?": "assistant::ToggleFocus",
+      "cmd-alt-s": "workspace::SaveAll",
+      "cmd-k m": "language_selector::Toggle",
+      "escape": "workspace::Unfollow",
+      "cmd-k cmd-left": ["workspace::ActivatePaneInDirection", "Left"],
+      "cmd-k cmd-right": ["workspace::ActivatePaneInDirection", "Right"],
+      "cmd-k cmd-up": ["workspace::ActivatePaneInDirection", "Up"],
+      "cmd-k cmd-down": ["workspace::ActivatePaneInDirection", "Down"],
+      "cmd-k shift-left": ["workspace::SwapPaneInDirection", "Left"],
+      "cmd-k shift-right": ["workspace::SwapPaneInDirection", "Right"],
+      "cmd-k shift-up": ["workspace::SwapPaneInDirection", "Up"],
+      "cmd-k shift-down": ["workspace::SwapPaneInDirection", "Down"],
+      "alt-t": "task::Rerun",
+      "alt-shift-t": "task::Spawn"
+    }
+  }
+]

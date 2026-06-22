@@ -59,6 +59,7 @@ alias cli="cd ~/dev/wiremock-inc/wiremock-cli"
 alias mockhost="cd ~/dev/wiremock-inc/mock-host"
 alias admin="cd ~/dev/wiremock-inc/admin"
 alias openapi="cd ~/dev/wiremock-inc/openapi"
+alias kotlintc="/Users/leeturner/.local/bin/kotlin"
 
 mvu() {
     mv ~/Downloads/$1 .
@@ -72,20 +73,58 @@ export PATH=$GRAALVM_HOME/bin:$PATH
 export PATH=$PATH:/Applications/roc_nightly-macos_apple_silicon-2025-09-09-d73ea109cc2
 export PATH=$PATH:/Applications/v
 
+safe() {
+  safehouse \
+    --add-dirs=~/dev \
+    --add-dirs=~/Library/Logs/wiremock-cli \
+    '--add-dirs=~/Library/Application Support/JetBrains' \
+    '--add-dirs=~/Library/Caches/JetBrains' \
+    '--add-dirs=~/Library/Logs/JetBrains' \
+    --add-dirs-ro=~/.claude/skills:~/.tessl/plugins \
+    --enable=docker \
+    "$@";
+  }
+
+# Sandboxed — the default. Just type the command name.
+claude()   { safe claude --dangerously-skip-permissions "$@"; }
+codex()    { safe codex --dangerously-bypass-approvals-and-sandbox "$@"; }
+amp()      { safe amp --dangerously-allow-all "$@"; }
+gemini()   { NO_BROWSER=true safe gemini --yolo "$@"; }
+
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
 
-source $(brew --prefix asdf)/libexec/asdf.sh
+# source $(brew --prefix asdf)/libexec/asdf.sh
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-. $(brew --prefix asdf)/libexec/asdf.sh
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# . $(brew --prefix asdf)/libexec/asdf.sh
 
 source /Users/leeturner/.config/wiremock-cli/command-completion.zsh
 
 eval "$(zoxide init zsh)"
+
+export DOCKER_HOST="unix://$HOME/.docker/run/docker.sock"
+
+# Added by Antigravity
+export PATH="/Users/leeturner/.antigravity/antigravity/bin:$PATH"
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/leeturner/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/leeturner/.lmstudio/bin"
+# End of LM Studio CLI section
+# Raise open file descriptor limits to avoid EMFILE in file watchers.
+if command -v launchctl >/dev/null 2>&1; then
+  launchctl limit maxfiles 65536 200000 >/dev/null 2>&1 || true
+fi
+ulimit -n 65536 >/dev/null 2>&1 || true
+

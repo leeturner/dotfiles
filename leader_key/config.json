@@ -364,6 +364,12 @@
           "label" : "Warp",
           "type" : "application",
           "value" : "/Applications/Warp.app"
+        },
+        {
+          "key" : "z",
+          "label" : "Zed",
+          "type" : "application",
+          "value" : "/Applications/Zed.app"
         }
       ],
       "iconPath" : "hammer",

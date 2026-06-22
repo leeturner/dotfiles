@@ -25,6 +25,7 @@ Plug 'dbakker/vim-paragraph-motion'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'justinmk/vim-sneak'
 Plug 'inkarkat/vim-ReplaceWithRegister'
+Plug 'chrisbra/matchit'
 
 """ Plugin settings 
 let g:highlightedyank_highlight_duration = "1000"
@@ -124,7 +125,7 @@ map <leader>ft <Action>(ActivateTODOToolWindow)
 " Views (leader v)
 map <leader>vf :action ActivateProjectToolWindow<cr>
 map <leader>vp :action ActivateProblemsViewToolWindow<cr>
-map <leader>vs :action ActivateStructureToolWindow<cr>
+map <leader>vs :action FileStructurePopup<cr>
 map <leader>vt :action ActivateTerminalToolWindow<cr>
 map <leader>vv :action ActivateServicesToolWindow<cr>
 map <leader>vd :action ActivateDebugToolWindow<cr>

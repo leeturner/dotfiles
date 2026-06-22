@@ -2,24 +2,72 @@
   {
     "context": "Workspace",
     "bindings": {
-      "cmd-e": "file_finder::Toggle",
-      "cmd-shift-p": "command_palette::Toggle",
-      "cmd-shift-m": "diagnostics::Deploy",
-      "cmd-shift-e": "project_panel::ToggleFocus",
-      "cmd-?": "assistant::ToggleFocus",
-      "cmd-alt-s": "workspace::SaveAll",
-      "cmd-k m": "language_selector::Toggle",
-      "escape": "workspace::Unfollow",
-      "cmd-k cmd-left": ["workspace::ActivatePaneInDirection", "Left"],
-      "cmd-k cmd-right": ["workspace::ActivatePaneInDirection", "Right"],
-      "cmd-k cmd-up": ["workspace::ActivatePaneInDirection", "Up"],
-      "cmd-k cmd-down": ["workspace::ActivatePaneInDirection", "Down"],
-      "cmd-k shift-left": ["workspace::SwapPaneInDirection", "Left"],
-      "cmd-k shift-right": ["workspace::SwapPaneInDirection", "Right"],
-      "cmd-k shift-up": ["workspace::SwapPaneInDirection", "Up"],
-      "cmd-k shift-down": ["workspace::SwapPaneInDirection", "Down"],
-      "alt-t": "task::Rerun",
-      "alt-shift-t": "task::Spawn"
-    }
-  }
+      "ctrl-z": "workspace::ToggleCenteredLayout",
+      // "cmd-shift-m": "diagnostics::Deploy",
+      // "cmd-shift-e": "project_panel::ToggleFocus",
+      // "cmd-?": "agent::ToggleFocus",
+      // "cmd-alt-s": "workspace::SaveAll",
+      // "cmd-k m": "language_selector::Toggle",
+      // "escape": "workspace::Unfollow",
+      // "cmd-k cmd-left": "workspace::ActivatePaneLeft",
+      // "cmd-k cmd-right": "workspace::ActivatePaneRight",
+      // "cmd-k cmd-up": "workspace::ActivatePaneUp",
+      // "cmd-k cmd-down": "workspace::ActivatePaneDown",
+      // "cmd-k shift-left": "workspace::SwapPaneLeft",
+      // "cmd-k shift-right": "workspace::SwapPaneRight",
+      // "cmd-k shift-up": "workspace::SwapPaneUp",
+      // "cmd-k shift-down": "workspace::SwapPaneDown",
+      // "alt-t": "task::Rerun",
+      // "alt-shift-t": "task::Spawn",
+    },
+  },
+  {
+    "context": "VimControl && vim_mode == normal",
+    "bindings": {
+      "Z Z": "workspace::CloseProject",
+
+      "] ]": "vim::NextMethodStart",
+      "[ [": "vim::PreviousMethodStart",
+
+      "space v t": "terminal_panel::Toggle",
+      "space v s": "outline::Toggle",
+
+      // Collapse different regions
+      "z c": "editor::ToggleFold",
+      "z o": "editor::ToggleFold",
+      "z m": "editor::FoldAll",
+      "z r": "editor::UnfoldAll",
+      // map zc <Action>(CollapseRegion)
+      // map zo <Action>(ExpandRegion)
+      // map zm <Action>(CollapseAllRegions)
+      // map zr <Action>(ExpandAllRegions)
+
+      "space f w": "pane::DeploySearch",
+      "space f f": "file_finder::Toggle",
+
+      // Split and Split Navigation
+      "space s v": "pane::SplitVertical",
+      "space s h": "pane::SplitHorizontal",
+      "space s x": "pane::CloseActiveItem",
+      "space s s": "pane::CloseAllItems",
+      "space s m": "vim::MaximizePane",
+
+      "space w h": "workspace::ActivatePaneLeft",
+      "space w l": "workspace::ActivatePaneRight",
+      "space w j": "workspace::ActivatePaneDown",
+      "space w k": "workspace::ActivatePaneUp",
+
+      // "space w": "pane::CloseActiveItem",
+      // "space o": "outline::Toggle",
+      // "space g b": "git::Branch",
+      // "space t": "terminal_panel::ToggleFocus",
+      // "space g g": "git_panel::ToggleFocus",
+      // "space /": "pane::DeploySearch",
+      // "escape escape": "workspace::Save",
+      // "shift-u": "vim::Redo",
+      // "space h": "editor::ToggleInlayHints",
+      // "space e": "pane::RevealInProjectPanel",
+      // "ctrl-a": "editor::ToggleCodeActions",
+    },
+  },
 ]
